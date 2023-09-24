@@ -15,6 +15,14 @@ app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname + "/index.html"));
 });
 
+app.get("/echo/:message", (req, res) => {
+  // res.json({ route: req.params.message });
+  res.send(req.params.message);
+  // if (req.params.message === "secret") {
+  //   ("the secret is... 42!");
+  // }
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
