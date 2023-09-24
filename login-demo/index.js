@@ -1,18 +1,22 @@
-// index.js
 import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 
-// Reads the PORT value from the environment variable `PORT`.
-// If not found, uses the default value of 3000.
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.get("/", (req, res) => {
-  // Logged in the terminal on the SERVER side
-  console.log("Someone wants the root route!");
-  // Sent to the client (visible in the browser window)
-  res.send("Welcome to our site! 😎");
+// app.get("/", (req, res) => {
+//   res.send("<h1>Homepage</h1>");
+// });
+
+app.get("/", function (req, res) {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  res.sendFile(path.join(__dirname + "/index.html"));
 });
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
+
+app.use(express.json());
